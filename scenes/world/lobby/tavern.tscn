@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dxa206ny0pbuw"]
+
+[ext_resource type="PackedScene" uid="uid://cfettgdb2wkww" path="res://models/lobby/tavern.blend" id="1_731o7"]
+
+[node name="Tavern" type="Node3D" unique_id=533438617]
+
+[node name="tavern" parent="." unique_id=22947808 instance=ExtResource("1_731o7")]

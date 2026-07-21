@@ -11,6 +11,12 @@ size = Vector3(0.6574707, 1.6860657, 0.66845703)
 size = Vector3(0.6553955, 1.7, 0.69091797)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wnvi2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=1604328362]
 script = ExtResource("1_3c3w1")
@@ -37,4 +43,3 @@ transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1217724394]
 replication_config = SubResource("SceneReplicationConfig_wnvi2")
-visibility_update_mode = 1

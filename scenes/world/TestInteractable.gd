@@ -1,20 +1,30 @@
 extends Interactable
 
-@onready var anim: AnimationPlayer = $AnimationPlayer;
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
-var is_up = false;
+var is_up := false
 
 func interact(player):
-	print(player.name + " interagiu!")
+	if !multiplayer.is_server():
+		request_interact.rpc_id(1)
+		return
 	
-	if is_up:
-		anim.play("down");
-	else:
-		anim.play("up");
+	toggle()
 
+@rpc("any_peer", "reliable")
+func request_interact():
+	if !multiplayer.is_server():
+		return
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "up":
-		is_up = true;
+	toggle()
+
+func toggle():
+	is_up = !is_up
+	play_animation.rpc(is_up)
+
+@rpc("call_local", "reliable")
+func play_animation(up: bool):
+	if up:
+		anim.play("up")
 	else:
-		is_up = false;
+		anim.play("down")

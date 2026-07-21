@@ -1,5 +1,7 @@
 extends Node
 
+#127.0.0.1
+
 signal game_started
 signal player_connected(peer_id: int)
 

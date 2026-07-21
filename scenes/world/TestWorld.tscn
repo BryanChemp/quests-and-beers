@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cgwp6xs2k8ipr" path="res://scripts/world/world.gd" id="1_xpb83"]
 [ext_resource type="PackedScene" uid="uid://c24jytvw3vrop" path="res://player/Player.tscn" id="2_ct0am"]
 [ext_resource type="Texture2D" uid="uid://c1x1qt6nr2jik" path="res://icon.svg" id="3_70k0y"]
+[ext_resource type="PackedScene" uid="uid://8bvgam7mbu1" path="res://scenes/world/TestInteractable.tscn" id="4_pip6g"]
+[ext_resource type="PackedScene" uid="uid://cfettgdb2wkww" path="res://models/lobby/tavern.blend" id="5_qh8t5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
 albedo_color = Color(0.468935, 0.70952326, 0.4541517, 1)
@@ -57,3 +59,8 @@ environment = SubResource("Environment_g4v7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=337738792]
 transform = Transform3D(1, 0, 0, 0, 0.1455012, 0.98935807, 0, -0.98935807, 0.1455012, 0, 50.977642, 9.141926)
+
+[node name="TestInteractable" parent="." unique_id=769980385 instance=ExtResource("4_pip6g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.851103, 0, 0)
+
+[node name="tavern" parent="." unique_id=22947808 instance=ExtResource("5_qh8t5")]
