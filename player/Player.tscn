@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c24jytvw3vrop"]
+
+[ext_resource type="Script" uid="uid://clenafvlgv80c" path="res://scripts/player/player_controller.gd" id="1_3c3w1"]
+[ext_resource type="Script" uid="uid://dfq08lj5ofi25" path="res://scripts/player/camera_controller.gd" id="2_wnvi2"]
+[ext_resource type="Script" uid="uid://sfckc2xwqt8m" path="res://scripts/player/player_input.gd" id="3_wnvi2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehsmr"]
+size = Vector3(0.6574707, 1.6860657, 0.66845703)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+size = Vector3(0.6553955, 1.7, 0.69091797)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wnvi2"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1604328362]
+script = ExtResource("1_3c3w1")
+
+[node name="PlayerInput" type="Node" parent="." unique_id=21154352]
+script = ExtResource("3_wnvi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=783651306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014526367, 0.8601532, 0.16577148)
+shape = SubResource("BoxShape3D_ehsmr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=652339153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009894133, 0.857932, 0.15454102)
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=133754574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4771397, -0.42886233)
+script = ExtResource("2_wnvi2")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=290444735]
+
+[node name="InteractionRay" type="RayCast3D" parent="CameraPivot" unique_id=1536899241]
+transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1217724394]
+replication_config = SubResource("SceneReplicationConfig_wnvi2")
+visibility_update_mode = 1

@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://vu0b11r84h0t"]
+
+[ext_resource type="Script" uid="uid://cgwp6xs2k8ipr" path="res://scripts/world/world.gd" id="1_xpb83"]
+[ext_resource type="PackedScene" uid="uid://c24jytvw3vrop" path="res://player/Player.tscn" id="2_ct0am"]
+[ext_resource type="Texture2D" uid="uid://c1x1qt6nr2jik" path="res://icon.svg" id="3_70k0y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+albedo_color = Color(0.468935, 0.70952326, 0.4541517, 1)
+albedo_texture = ExtResource("3_70k0y")
+uv1_scale = Vector3(6.705, 6.705, 6.705)
+uv1_triplanar = true
+uv2_scale = Vector3(4.585, 4.585, 4.585)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_70k0y"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+
+[node name="TestWorld" type="Node3D" unique_id=758928362]
+script = ExtResource("1_xpb83")
+player_scene = ExtResource("2_ct0am")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696489133]
+transform = Transform3D(62.79339, 0, 0, 0, 1, 0, 0, 0, 51.876694, 0, 0, 0)
+mesh = SubResource("PlaneMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=2048109110]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1083705960]
+shape = SubResource("ConcavePolygonShape3D_70k0y")
+
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=1789033304]
+
+[node name="Spawn1" type="Marker3D" parent="SpawnPoints" unique_id=950661864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.056248)
+
+[node name="Spawn2" type="Marker3D" parent="SpawnPoints" unique_id=1811901314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.510944)
+
+[node name="Spawn3" type="Marker3D" parent="SpawnPoints" unique_id=1289000177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.825417, 0, 0)
+
+[node name="Spawn4" type="Marker3D" parent="SpawnPoints" unique_id=1245807278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.97226, 0, 0)
+
+[node name="Players" type="Node3D" parent="." unique_id=101729038]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=480481512]
+_spawnable_scenes = PackedStringArray("uid://c24jytvw3vrop")
+spawn_path = NodePath("../Players")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=962516626]
+environment = SubResource("Environment_g4v7s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=337738792]
+transform = Transform3D(1, 0, 0, 0, 0.1455012, 0.98935807, 0, -0.98935807, 0.1455012, 0, 50.977642, 9.141926)

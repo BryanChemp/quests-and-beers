@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bk4k7a7qbmaw8"]
+
+[ext_resource type="Script" uid="uid://chmuab2j5nmhh" path="res://scripts/ui/main_menu.gd" id="1_vjtqc"]
+
+[node name="MainMenu" type="Node3D" unique_id=966757105]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1456336091]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=2030173256]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjtqc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1442936303]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -50.5
+offset_right = 201.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=2125874268]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/Control/VBoxContainer" unique_id=2076768589]
+layout_mode = 2
+text = "Join"
+
+[node name="IpEdit" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer" unique_id=1205585431]
+layout_mode = 2
+placeholder_text = "Type an IP"
+alignment = 1
