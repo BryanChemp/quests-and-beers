@@ -8,7 +8,8 @@
 [ext_resource type="Script" uid="uid://sfckc2xwqt8m" path="res://scripts/player/player_input.gd" id="3_wnvi2"]
 [ext_resource type="Script" uid="uid://do5kdohd82erq" path="res://player/procedural_locomotion.gd" id="7_gskgj"]
 [ext_resource type="Script" uid="uid://c21l4t35yoxq7" path="res://player/foot_placement.gd" id="8_06mnu"]
-[ext_resource type="Script" uid="uid://cimr3eaafbp43" path="res://player/hip_controller.gd" id="9_mhpjh"]
+[ext_resource type="Script" uid="uid://bi1projlsj7uk" path="res://player/eyes_controller.gd" id="9_mhpjh"]
+[ext_resource type="Script" uid="uid://cm4iiqbwvbq5e" path="res://player/debug.gd" id="10_ndjxb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ddnt4"]
 radius = 0.19140625
@@ -351,6 +352,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:network_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=1604328362]
 script = ExtResource("1_3c3w1")
@@ -364,7 +368,11 @@ debug_color = Color(0.9411765, 0, 0.6117647, 0.8392157)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1592366, -0.24429296)
 script = ExtResource("2_wnvi2")
 
+[node name="DebugCamera3D" type="Camera3D" parent="CameraPivot" unique_id=2049523057]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.5240752)
+
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=290444735]
+current = true
 
 [node name="InteractionRay" type="RayCast3D" parent="CameraPivot" unique_id=1536899241]
 transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0, 0)
@@ -1107,10 +1115,10 @@ transform = Transform3D(0.99998045, 7.631024e-08, 0, 7.8231096e-08, 0, 1, -2.566
 shape = SubResource("CapsuleShape3D_ndjxb")
 
 [node name="Physical Bone arm_002_L" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=178518333]
-transform = Transform3D(-0.038677808, -0.0074821287, -4.566845, -4.5668507, 6.0408907e-05, 0.03867776, -2.9590246e-06, 4.5670085, -0.007482372, 1.8514315, 0.7451842, -0.13104399)
+transform = Transform3D(-0.038677808, -0.0074821287, -4.566845, -4.5668507, 6.040889e-05, 0.03867776, -2.959039e-06, 4.5670085, -0.007482372, 1.8514315, 0.7451842, -0.13104399)
 joint_type = 5
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.280641e-07, 9.2047636e-10, 0.0913623)
-body_offset = Transform3D(4.5670147, 2.0688394e-06, -8.0503796e-08, -4.209501e-08, -3.259629e-09, -4.567015, -2.0232185e-06, 4.5670147, -2.561137e-08, -2.861023e-06, 0.41725302, -1.8626451e-09)
+body_offset = Transform3D(4.5670147, 2.0688576e-06, -8.0503796e-08, -4.2095035e-08, -3.259629e-09, -4.567015, -2.0232328e-06, 4.5670147, -2.561137e-08, -2.861023e-06, 0.41725302, -1.8626451e-09)
 bone_name = "arm.002.L"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1477,10 +1485,10 @@ transform = Transform3D(1, -1.513456e-12, -3.0695446e-12, -1.4210855e-14, -4.768
 shape = SubResource("CapsuleShape3D_v4f8b")
 
 [node name="Physical Bone finger_401_L" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1371176301]
-transform = Transform3D(9.207125e-06, -4.313946, 1.4991655, -4.5670147, 1.4447675e-06, 3.220573e-05, -3.0895393e-05, -1.4991655, -4.313946, 2.4479127, 0.74061084, 0.13187791)
+transform = Transform3D(9.207125e-06, -4.313946, 1.4991655, -4.5670147, 1.4447669e-06, 3.220573e-05, -3.0895393e-05, -1.4991655, -4.313946, 2.4479127, 0.74061084, 0.13187791)
 joint_type = 5
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9716062e-08, 4.6372566e-08, 0.01175924)
-body_offset = Transform3D(4.567013, -5.973577e-08, -3.2892738e-05, -3.286493e-05, 2.2649765e-06, -4.567014, -9.094947e-13, 4.567014, 2.2649765e-06, 4.7683716e-07, 0.05370462, -2.3841858e-07)
+body_offset = Transform3D(4.567013, -5.97352e-08, -3.2892738e-05, -3.286493e-05, 2.2649765e-06, -4.567014, -9.094947e-13, 4.567014, 2.2649765e-06, 4.7683716e-07, 0.05370462, -2.3841858e-07)
 bone_name = "finger.401.L"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1625,10 +1633,10 @@ transform = Transform3D(0.9999808, -2.9453076e-08, 9.313226e-09, 5.5879354e-09, 
 shape = SubResource("CapsuleShape3D_w24id")
 
 [node name="Physical Bone arm_002_R" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=648175504]
-transform = Transform3D(-0.038679022, 0.0075254836, 4.566845, 4.5668507, 6.3997875e-05, 0.038678974, -2.6064637e-07, 4.5670085, -0.007525756, -1.8610628, 0.7451794, -0.13104402)
+transform = Transform3D(-0.038679022, 0.0075254836, 4.566845, 4.5668507, 6.399788e-05, 0.038678974, -2.6065635e-07, 4.5670085, -0.007525756, -1.8610628, 0.7451794, -0.13104402)
 joint_type = 5
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7871404e-07, 8.7151545e-07, 0.09136231)
-body_offset = Transform3D(4.567014, 1.1817397e-06, 2.386394e-06, 2.4247424e-06, -4.3488108e-05, -4.5670156, -1.1578268e-06, 4.567015, -4.344294e-05, -2.861023e-06, 0.41725314, -1.1175871e-08)
+body_offset = Transform3D(4.567014, 1.1817469e-06, 2.386394e-06, 2.4247424e-06, -4.3488108e-05, -4.5670156, -1.1578368e-06, 4.567015, -4.344294e-05, -2.861023e-06, 0.41725314, -1.1175871e-08)
 bone_name = "arm.002.R"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1995,10 +2003,10 @@ transform = Transform3D(1, -7.1054274e-15, 0, 0, 0, 1, -7.1054274e-15, -1, 0, -1
 shape = SubResource("CapsuleShape3D_mlfor")
 
 [node name="Physical Bone finger_401_R" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1671763147]
-transform = Transform3D(3.723402e-06, 4.3139434, -1.499172, 4.5670147, 3.2892356e-07, 1.2289311e-05, 1.1716298e-05, -1.499172, -4.3139434, -2.4575431, 0.74061084, 0.13187787)
+transform = Transform3D(3.723402e-06, 4.3139434, -1.499172, 4.5670147, 3.289237e-07, 1.2289311e-05, 1.1716298e-05, -1.499172, -4.3139434, -2.4575431, 0.74061084, 0.13187787)
 joint_type = 5
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.202054e-08, -1.4157317e-07, 0.011759304)
-body_offset = Transform3D(4.567013, -2.7442084e-08, 1.2578847e-05, 1.2595043e-05, -6.198883e-06, -4.567015, -9.0039975e-11, 4.567014, -5.841255e-06, -4.7683716e-07, 0.053704917, 7.1525574e-07)
+body_offset = Transform3D(4.567013, -2.7442226e-08, 1.2578847e-05, 1.2595043e-05, -6.198883e-06, -4.567015, -9.0039975e-11, 4.567014, -5.841255e-06, -4.7683716e-07, 0.053704917, 7.1525574e-07)
 bone_name = "finger.401.R"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2217,10 +2225,10 @@ transform = Transform3D(1.0000031, 1.2369128e-09, 0, 4.1909516e-09, -1.1175871e-
 shape = SubResource("CapsuleShape3D_8tqfn")
 
 [node name="Physical Bone foot_001_L" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=127230578]
-transform = Transform3D(-4.5670075, -0.008141818, -2.8253024e-05, -0.008141818, 4.5670075, 2.5183376e-06, 2.824849e-05, 2.5687018e-06, -4.5670147, 0.5145081, -3.595729, -0.010066748)
+transform = Transform3D(-4.5670075, -0.008141818, -2.8253035e-05, -0.008141818, 4.5670075, 2.5183388e-06, 2.8248502e-05, 2.568703e-06, -4.5670147, 0.5145081, -3.595729, -0.010066748)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3927322e-08, 9.838499e-08, 0.042816784)
-body_offset = Transform3D(4.566973, 8.65014e-06, 2.3198845e-07, -1.9987783e-07, -1.7397497e-08, -4.566995, -5.2152892e-08, 4.567014, 2.3826474e-06, -1.1920929e-07, 0.19554405, -5.5134296e-07)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3927203e-08, 9.838499e-08, 0.042816784)
+body_offset = Transform3D(4.566973, 8.65014e-06, 2.3200118e-07, -1.9986874e-07, -1.7396133e-08, -4.566995, -5.2152892e-08, 4.567014, 2.382648e-06, -1.1920929e-07, 0.19554405, -5.5134296e-07)
 bone_name = "foot.001.L"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2365,10 +2373,10 @@ transform = Transform3D(1, -4.3332693e-07, 0, -3.8184226e-08, 6.109476e-07, 1, 1
 shape = SubResource("CapsuleShape3D_y617q")
 
 [node name="Physical Bone leg_003_R" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1542779159]
-transform = Transform3D(-4.5670075, 0.008111892, -4.4685197e-07, -0.000918638, -0.51694477, 4.5376635, 0.0080597075, 4.537657, 0.5169455, -0.5372261, -2.9007692, -0.12561539)
+transform = Transform3D(-4.5670075, 0.008111892, -4.4685197e-07, -0.000918638, -0.51694477, 4.5376635, 0.0080597075, 4.537657, 0.5169455, -0.5372262, -2.9007692, -0.12561539)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004397931, 8.283497e-06, 0.15474866)
-body_offset = Transform3D(4.5669737, 1.4454126e-06, -8.346746e-06, -1.1629891e-07, 5.9604645e-08, -4.5670133, -1.3969839e-08, 4.566998, -5.90086e-06, 0.020086527, 0.7067392, -3.6917627e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004397957, 8.283497e-06, 0.15474866)
+body_offset = Transform3D(4.5669737, 1.4454126e-06, -8.346746e-06, -1.1629891e-07, 5.9604645e-08, -4.5670133, -1.3969839e-08, 4.566998, -5.90086e-06, 0.020086646, 0.7067392, -3.6917627e-05)
 bone_name = "leg.003.R"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2439,10 +2447,10 @@ transform = Transform3D(1, -5.966285e-10, 2.0605512e-08, 0, -5.811453e-07, 1, 0,
 shape = SubResource("CapsuleShape3D_8eyfg")
 
 [node name="Physical Bone foot_001_R" type="PhysicalBone3D" parent="VisualRoot/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1166982800]
-transform = Transform3D(-4.5670075, 0.00814168, 2.7050753e-05, 0.00814168, 4.5670075, 2.1294225e-06, -2.7046915e-05, 2.177643e-06, -4.5670147, -0.517144, -3.6029658, -0.018490814)
+transform = Transform3D(-4.5670075, 0.00814168, 2.7050753e-05, 0.00814168, 4.5670075, 2.1294225e-06, -2.7046915e-05, 2.177643e-06, -4.5670147, -0.517144, -3.6029658, -0.01849088)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0653342e-06, -1.3292592e-08, 0.04097223)
-body_offset = Transform3D(4.5669737, -8.19472e-06, -5.424936e-07, -1.3612043e-07, 1.01952764e-07, -4.5669966, 1.5834793e-08, 4.5670137, 2.572741e-06, 4.887581e-06, 0.18712005, -4.4703484e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0653342e-06, -1.3292585e-08, 0.040972218)
+body_offset = Transform3D(4.5669737, -8.19472e-06, -5.424936e-07, -1.3612043e-07, 1.01952764e-07, -4.5669966, 1.5834793e-08, 4.5670137, 2.572741e-06, 4.887581e-06, 0.18711999, -4.4703484e-08)
 bone_name = "foot.001.R"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -2568,6 +2576,49 @@ settings/0/end_bone = 22
 settings/0/use_virtual_end = false
 settings/0/extend_end_bone = false
 
+[node name="HeadLookAtModifier" type="LookAtModifier3D" parent="VisualRoot/Skeleton3D" unique_id=2082413670]
+target_node = NodePath("../../ProceduralRig/LookAtTargets/HeadLookTarget")
+bone_name = "spine.005"
+bone = 4
+
+[node name="LeftEyeLookAtModifier" type="LookAtModifier3D" parent="VisualRoot/Skeleton3D" unique_id=1237601968]
+target_node = NodePath("../../ProceduralRig/LookAtTargets/EyesLookTarget")
+bone_name = "eye.001.L"
+bone = 7
+forward_axis = 2
+primary_rotation_axis = 2
+
+[node name="RightEyeLookAtModifier" type="LookAtModifier3D" parent="VisualRoot/Skeleton3D" unique_id=692026003]
+target_node = NodePath("../../ProceduralRig/LookAtTargets/EyesLookTarget")
+bone_name = "eye.001.R"
+bone = 8
+forward_axis = 2
+primary_rotation_axis = 2
+
+[node name="BottomMouthCopyTransform" type="CopyTransformModifier3D" parent="VisualRoot/Skeleton3D" unique_id=2072827626]
+setting_count = 1
+settings/0/amount = 1.0
+settings/0/apply_bone_name = "mouth.002"
+settings/0/apply_bone = 6
+settings/0/reference_type = 1
+settings/0/reference_node = NodePath("../../ProceduralRig/CopyTransformsTargets/BottomMouthCopyTarget")
+settings/0/copy = 2
+settings/0/axes = 7
+settings/0/invert = 0
+settings/0/additive = false
+
+[node name="TopMouthCopyTransform" type="CopyTransformModifier3D" parent="VisualRoot/Skeleton3D" unique_id=1885756361]
+setting_count = 1
+settings/0/amount = 1.0
+settings/0/apply_bone_name = "mouth.001"
+settings/0/apply_bone = 5
+settings/0/reference_type = 1
+settings/0/reference_node = NodePath("../../ProceduralRig/CopyTransformsTargets/TopMouthCopyTarget")
+settings/0/copy = 2
+settings/0/axes = 7
+settings/0/invert = 0
+settings/0/additive = false
+
 [node name="ProceduralRig" type="Node3D" parent="VisualRoot" unique_id=1216614457]
 
 [node name="IKTargets" type="Node3D" parent="VisualRoot/ProceduralRig" unique_id=1451551609]
@@ -2587,10 +2638,10 @@ transform = Transform3D(0.07850161, 0, 0, 0, 1, 0, 0, 0, 0.19876747, 0, 0, 0)
 mesh = SubResource("BoxMesh_ndjxb")
 
 [node name="LeftHandTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=1297041946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56619036, 0.9779718, 0)
+transform = Transform3D(0.8367001, 0, -0.54766136, 0, 1, 0, 0.54766136, 0, 0.8367001, -0.20369735, 0.60271996, -0.030611515)
 
 [node name="RightHandTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=431326100]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5679573, 0.9779718, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17749864, 0.60033256, 0.037013948)
 
 [node name="LeftLegPoleTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=1606138951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108043194, 0.3543167, -0.44555053)
@@ -2599,16 +2650,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108043194, 0.3543167, -0.4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1138854, 0.35188088, -0.44874012)
 
 [node name="LeftArmPoleTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=249375256]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38248703, 0.99392533, -0.44789624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38248703, 0.8591169, 0.26715714)
 
 [node name="RightArmPoleTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=949463572]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31466448, 0.99392533, -0.44789624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31466448, 0.8591169, 0.26715714)
 
 [node name="HipTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=1180661010]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6483184, 0)
 
 [node name="HeadTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/IKTargets" unique_id=1876271496]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2032349, 0)
+
+[node name="LookAtTargets" type="Node3D" parent="VisualRoot/ProceduralRig" unique_id=521242691]
+
+[node name="HeadLookTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/LookAtTargets" unique_id=359713956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012637377, 1.0904016, -1.1450115)
+
+[node name="EyesLookTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/LookAtTargets" unique_id=451927012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0893237, 1.2538632, -0.6723665)
+
+[node name="CopyTransformsTargets" type="Node3D" parent="VisualRoot/ProceduralRig" unique_id=1885847169]
+
+[node name="BottomMouthCopyTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/CopyTransformsTargets" unique_id=214351229]
+transform = Transform3D(-0.9669166, -0.25475043, -0.01321605, -0.020452676, 0.12906262, -0.9914256, 0.25427175, -0.95835537, -0.13000308, 0, 1.1385555, -0.09085466)
+
+[node name="TopMouthCopyTarget" type="Marker3D" parent="VisualRoot/ProceduralRig/CopyTransformsTargets" unique_id=226510709]
+transform = Transform3D(-0.9669166, -0.25475043, -0.01321605, -0.020452676, 0.12906262, -0.9914256, 0.25427175, -0.95835537, -0.13000308, 0, 1.1865207, -0.117440596)
 
 [node name="GroundDetectors" type="Node3D" parent="VisualRoot/ProceduralRig" unique_id=397586345]
 
@@ -2660,7 +2727,7 @@ left_foot_target = NodePath("../../VisualRoot/ProceduralRig/IKTargets/LeftFootTa
 right_foot_target = NodePath("../../VisualRoot/ProceduralRig/IKTargets/RightFootTarget")
 step_duration = 0.2
 step_height = 0.25
-step_trigger_distance = 0.15
+step_trigger_distance = 0.1
 
 [node name="FootPlacement" type="Node" parent="Controllers" unique_id=311883929]
 script = ExtResource("8_06mnu")
@@ -2669,16 +2736,21 @@ left_foot_home = NodePath("../../VisualRoot/ProceduralRig/LeftFootHome")
 right_foot_home = NodePath("../../VisualRoot/ProceduralRig/RightFootHome")
 max_speed_for_prediction = 3.0
 
-[node name="HipController" type="Node" parent="Controllers" unique_id=1027143038]
+[node name="EyesController" type="Node" parent="Controllers" unique_id=1461095348]
 script = ExtResource("9_mhpjh")
 player = NodePath("../..")
-skeleton = NodePath("../../VisualRoot/Skeleton3D")
-left_foot_target = NodePath("../../VisualRoot/ProceduralRig/IKTargets/LeftFootTarget")
-right_foot_target = NodePath("../../VisualRoot/ProceduralRig/IKTargets/RightFootTarget")
-max_leg_length = 0.265
+look_target = NodePath("../../VisualRoot/ProceduralRig/LookAtTargets/EyesLookTarget")
+
+[node name="HipController" type="Node" parent="Controllers" unique_id=1027143038]
 
 [node name="IKController" type="Node" parent="Controllers" unique_id=1333195669]
 
 [node name="ActiveRagollController" type="Node" parent="Controllers" unique_id=87777136]
 
 [node name="NetworkSync" type="Node" parent="Controllers" unique_id=1337430876]
+
+[node name="Debug" type="Node" parent="Controllers" unique_id=360432834]
+script = ExtResource("10_ndjxb")
+player = NodePath("../..")
+first_person_camera = NodePath("../../CameraPivot/Camera3D")
+third_person_camera = NodePath("../../CameraPivot/DebugCamera3D")

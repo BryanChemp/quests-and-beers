@@ -63,7 +63,10 @@ func _physics_process(_delta: float) -> void:
 
 
 func _place_home(home: Node3D, rest_local: Vector3, ray: RayCast3D) -> void:
-	var horizontal_velocity := Vector2(_player.velocity.x, _player.velocity.z)
+	var horizontal_velocity := Vector2(
+		_player.network_velocity.x,
+		_player.network_velocity.z
+	)
 	var speed := minf(horizontal_velocity.length(), max_speed_for_prediction)
 
 	var move_dir := Vector3.ZERO

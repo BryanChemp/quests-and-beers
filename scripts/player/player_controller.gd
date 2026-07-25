@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var network_velocity: Vector3 = Vector3.ZERO
+
 @export var walk_speed := 2.0
 @export var jump_velocity := 5.5
 @export var acceleration := 12.0
@@ -20,6 +22,7 @@ func _ready() -> void:
 	print("Is Authority:", is_multiplayer_authority())
 
 	$CameraPivot/Camera3D.current = is_multiplayer_authority()
+	add_to_group("players")
 
 
 func _physics_process(delta: float) -> void:
@@ -58,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	)
 
 	move_and_slide()
+	network_velocity = velocity
 
 func interact() -> void:
 	if !interaction_ray.is_colliding():
