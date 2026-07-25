@@ -5,6 +5,30 @@
 [ext_resource type="Texture2D" uid="uid://c1x1qt6nr2jik" path="res://icon.svg" id="3_70k0y"]
 [ext_resource type="PackedScene" uid="uid://8bvgam7mbu1" path="res://scenes/world/TestInteractable.tscn" id="4_pip6g"]
 [ext_resource type="PackedScene" uid="uid://cfettgdb2wkww" path="res://models/lobby/tavern.blend" id="5_qh8t5"]
+[ext_resource type="Shader" uid="uid://cu6m3e328a43x" path="res://player/outline_shader.gdshader" id="6_5hjce"]
+[ext_resource type="Shader" uid="uid://flbl6b27tes4" path="res://player/cell_shader.gdshader" id="7_qxdxr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vd5s7"]
+render_priority = 0
+shader = ExtResource("6_5hjce")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_size = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rrnh"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_vd5s7")
+shader = ExtResource("7_qxdxr")
+shader_parameter/albedo = Color(0.6216716, 0.64189804, 0.8562107, 1)
+shader_parameter/shadow_strength = 0.35
+shader_parameter/light_steps = 3.0
+shader_parameter/use_texture = false
+
+[sub_resource type="PrismMesh" id="PrismMesh_g4v7s"]
+material = SubResource("ShaderMaterial_4rrnh")
+size = Vector3(11.015, 1.285, 4.275)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5hjce"]
+data = PackedVector3Array(0, 0.6425, 2.1375, 5.5074997, -0.6425, 2.1375, -5.5074997, -0.6425, 2.1375, 0, 0.6425, -2.1375, -5.5074997, -0.6425, -2.1375, 5.5074997, -0.6425, -2.1375, 0, 0.6425, 2.1375, 0, 0.6425, -2.1375, 5.5074997, -0.6425, 2.1375, 0, 0.6425, -2.1375, 5.5074997, -0.6425, -2.1375, 5.5074997, -0.6425, 2.1375, 0, 0.6425, -2.1375, 0, 0.6425, 2.1375, -5.5074997, -0.6425, -2.1375, 0, 0.6425, 2.1375, -5.5074997, -0.6425, 2.1375, -5.5074997, -0.6425, -2.1375, -5.5074997, -0.6425, 2.1375, 5.5074997, -0.6425, 2.1375, -5.5074997, -0.6425, -2.1375, 5.5074997, -0.6425, 2.1375, 5.5074997, -0.6425, -2.1375, -5.5074997, -0.6425, -2.1375)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
 albedo_color = Color(0.468935, 0.70952326, 0.4541517, 1)
@@ -24,6 +48,15 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 [node name="TestWorld" type="Node3D" unique_id=758928362]
 script = ExtResource("1_xpb83")
 player_scene = ExtResource("2_ct0am")
+
+[node name="Ramp" type="MeshInstance3D" parent="." unique_id=1547553559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6194854, 7.5058107)
+mesh = SubResource("PrismMesh_g4v7s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ramp" unique_id=973692413]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D" unique_id=54853214]
+shape = SubResource("ConcavePolygonShape3D_5hjce")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=696489133]
 transform = Transform3D(62.79339, 0, 0, 0, 1, 0, 0, 0, 51.876694, 0, 0, 0)
@@ -64,3 +97,4 @@ transform = Transform3D(1, 0, 0, 0, 0.1455012, 0.98935807, 0, -0.98935807, 0.145
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.851103, 0, 0)
 
 [node name="tavern" parent="." unique_id=22947808 instance=ExtResource("5_qh8t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.946689, 0, 0)

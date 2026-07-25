@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var walk_speed := 5.0
+@export var walk_speed := 2.0
 @export var jump_velocity := 5.5
 @export var acceleration := 12.0
 @export var air_acceleration := 4.0
