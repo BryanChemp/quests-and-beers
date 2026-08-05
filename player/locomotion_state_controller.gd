@@ -52,7 +52,9 @@ func _physics_process(_delta: float) -> void:
 
 	var horizontal_velocity := Vector2(_player.network_velocity.x, _player.network_velocity.z)
 	if horizontal_velocity.length() < 0.05:
-		return  # Parado: não precisa recalcular o preset a cada frame.
+		return
+
+	is_crouching = _player.is_crouching
 
 	var is_running: bool = _player_input.run
 	var is_strafing := _is_strafing(horizontal_velocity)
