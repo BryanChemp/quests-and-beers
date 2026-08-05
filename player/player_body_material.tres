@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cupqtewcq6ca2"]
+
+[ext_resource type="Shader" uid="uid://cu6m3e328a43x" path="res://player/outline_shader.gdshader" id="1_kr0dc"]
+[ext_resource type="Shader" uid="uid://flbl6b27tes4" path="res://player/cell_shader.gdshader" id="2_vqf1r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gskgj"]
+render_priority = 0
+shader = ExtResource("1_kr0dc")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_size = 0.03
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_gskgj")
+shader = ExtResource("2_vqf1r")
+shader_parameter/albedo = Color(0.9753615, 0.16053939, 0.33881736, 1)
+shader_parameter/shadow_strength = 0.0190000009025
+shader_parameter/light_steps = 4.922000138795
+shader_parameter/use_texture = false

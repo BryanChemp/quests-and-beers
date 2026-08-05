@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var network_velocity: Vector3 = Vector3.ZERO
 @export var network_on_floor: bool
 @export var walk_speed := 2.0
+@export var crouched_speed := 1.0
+@export var crouched_run_speed := 1.8
 ## Velocidade ao segurar "run". Já bate com o max_speed_for_prediction do
 ## preset RUN (locomotion_presets.gd) — se mudar esse valor aqui, mude lá
 ## também, senão a previsão de passo satura antes de chegar na velocidade
@@ -15,7 +17,9 @@ extends CharacterBody3D
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var player_input: PlayerInput = $PlayerInput
 @onready var interaction_ray: RayCast3D = $CameraPivot/InteractionRay
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
+var is_crouching: bool = false
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
@@ -45,12 +49,25 @@ func _physics_process(delta: float) -> void:
 	if player_input.interact:
 		interact()
 
+	if player_input.crouch:
+		if is_crouching:
+			anim.play("crouch_up")
+			is_crouching = false
+		else:
+			anim.play("crouch_down")
+			is_crouching = true
+
 	var input := player_input.movement
 	var direction := (
 		transform.basis * Vector3(input.x, 0.0, input.y)
 	).normalized()
 
-	var speed := run_speed if player_input.run else walk_speed
+	var speed: float
+	if is_crouching:
+		speed = crouched_run_speed if player_input.run else crouched_speed
+	else:
+		speed = run_speed if player_input.run else walk_speed
+		
 	var accel := acceleration if is_on_floor() else air_acceleration
 	velocity.x = move_toward(
 		velocity.x,

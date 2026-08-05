@@ -5,6 +5,7 @@ var movement := Vector2.ZERO
 var jump := false
 var interact := false
 var run := false
+var crouch := false
 
 
 func _process(_delta: float) -> void:
@@ -21,3 +22,4 @@ func _process(_delta: float) -> void:
 	jump = Input.is_action_just_pressed("jump")
 	interact = Input.is_action_just_pressed("interact")
 	run = Input.is_action_pressed("run")
+	crouch = Input.is_action_just_pressed("crouch")
