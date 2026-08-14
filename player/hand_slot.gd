@@ -23,11 +23,11 @@ class PoseRef:
 @export var two_hand_pole: Node3D
 
 @export_group("IK Output")
-@export var ik_target: Node3D   # node real usado pela SkeletonIK/IK solver
+@export var ik_target: Node3D
 @export var ik_pole_target: Node3D
 
 @export_group("Blend")
-@export var blend_speed := 8.0
+@export var blend_speed := 32.0
 
 var state: HandState = HandState.REST
 var _poses: Dictionary = {}

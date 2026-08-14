@@ -2,7 +2,7 @@ extends Node3D
 
 @export var player_scene: PackedScene
 
-@onready var players: Node = $Players
+@onready var players: Node = $SubViewportContainer/SubViewport/Players
 
 
 func _ready():
